@@ -25,13 +25,13 @@ public class FoodManager : MonoBehaviour {
         
     }
 
-    private void CreateFood(int prefabIndex, Vector3 position)
+    public void CreateFood(int prefabIndex, Vector3 position)
     {
         GameObject newFood = Instantiate(FoodPrefabs[prefabIndex], position, Quaternion.identity);
         PlacedFood.Add(newFood.transform);
     }
 
-    private void RemoveFood(GameObject foodToRemove)
+    public void RemoveFood(GameObject foodToRemove)
     {
         PlacedFood.Remove(foodToRemove.transform);
         Destroy(foodToRemove);

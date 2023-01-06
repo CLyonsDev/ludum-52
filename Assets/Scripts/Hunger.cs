@@ -18,7 +18,11 @@ public class Hunger : MonoBehaviour
     private void Update() {
         CurrentHunger -= HungerLossRate * Time.deltaTime;
 
-        if((CurrentHunger / MaxHunger < SearchForFoodThreshold) && (SearchingForFood == false))
+        if(CurrentHunger <= 0)
+        {
+            Die();
+        }
+        else if((CurrentHunger / MaxHunger < SearchForFoodThreshold) && (SearchingForFood == false))
         {
             SearchingForFood = true;
             SendMessage("StartSearchForFood");
@@ -34,5 +38,10 @@ public class Hunger : MonoBehaviour
             SearchingForFood = false;
             SendMessage("StopSearchingForFood");
         }
+    }
+
+    private void Die()
+    {
+        GameManager._Instance.RemoveHuman(this.gameObject);
     }
 }

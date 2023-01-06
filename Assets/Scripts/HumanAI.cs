@@ -94,4 +94,14 @@ public class HumanAI : MonoBehaviour
 
         return closest;
     }
+
+    private void OnTriggerStay(Collider other) {
+        Debug.Log("Trigger Entered" + other.gameObject.tag);
+        if(other.gameObject.CompareTag("Food") && isHungry) {
+            // Eat food
+            Debug.Log("Eat time");
+            SendMessage("EatFood", 100);
+            foodManager.RemoveFood(other.gameObject);
+        }
+    }
 }
