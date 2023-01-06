@@ -108,8 +108,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6414020941331887924}
   - component: {fileID: 6414020941331887925}
-  - component: {fileID: 6414020941331887926}
   - component: {fileID: 6414020941331887927}
+  - component: {fileID: 6414020941331887926}
+  - component: {fileID: 8927490779461188635}
   m_Layer: 0
   m_Name: Human
   m_TagString: Untagged
@@ -153,24 +154,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6414020941331887926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6414020941331887922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2619bbd5ffec074f9425ac283c51d7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1
-  walkSpeed: 1
-  runSpeed: 2
-  minIdleTime: 1
-  maxIdleTime: 4.5
-  isIdling: 0
 --- !u!195 &6414020941331887927
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -193,6 +176,42 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6414020941331887926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6414020941331887922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2619bbd5ffec074f9425ac283c51d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  walkSpeed: 1
+  runSpeed: 2
+  minIdleTime: 1
+  maxIdleTime: 4.5
+  isIdling: 0
+  isHungry: 0
+--- !u!114 &8927490779461188635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6414020941331887922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573d089f9b765bd41819d0d5de1e3783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentHunger: 0
+  MaxHunger: 100
+  SearchForFoodThreshold: 0.85
+  SearchingForFood: 0
+  HungerLossRate: 2
 --- !u!1 &6414020942669147606
 GameObject:
   m_ObjectHideFlags: 0

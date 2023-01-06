@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2158.8584, g: 2263.4316, b: 3287.0195, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -350,6 +350,8 @@ GameObject:
   m_Component:
   - component: {fileID: 271778240}
   - component: {fileID: 271778241}
+  - component: {fileID: 271778242}
+  - component: {fileID: 271778243}
   m_Layer: 0
   m_Name: =GAME MANAGER=
   m_TagString: Untagged
@@ -387,9 +389,41 @@ MonoBehaviour:
   HumanPrefab: {fileID: 6414020941331887922, guid: 2ace4d285ec59f44e96281e14b5a15f6,
     type: 3}
   MaxPrefab: {fileID: 0}
-  startingHumans: 15
+  startingHumans: 1
   mapCenter: {x: 25, y: 1, z: 25}
   roomSize: 20
+--- !u!114 &271778242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271778239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa71f6749d05e646a37d7424d562e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FoodPlacementLayermask:
+    serializedVersion: 2
+    m_Bits: 1
+  CharacterLayermask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &271778243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 271778239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 438e568dfd7548d4e9728c8cea11e43a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FoodPrefabs: []
+  PlacedFood: []
 --- !u!1 &299648309
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class HumanAI : MonoBehaviour
 {
+    private FoodManager foodManager;
+
     [Header("Movement Attributes")]
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float walkSpeed = 1f;
@@ -16,6 +18,9 @@ public class HumanAI : MonoBehaviour
     [SerializeField] private float maxIdleTime = 4.5f;
     [SerializeField] private bool isIdling = false;
 
+    [Header("Behavior Tree")]
+    [SerializeField] private bool isHungry = false;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -24,20 +29,25 @@ public class HumanAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        foodManager = FoodManager._Instance;
         PickNextWaypoint();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(agent.remainingDistance <= agent.stoppingDistance && isIdling == false)
+        if(foodManager == null)
+            foodManager = FoodManager._Instance;
+
+        if(isHungry && foodManager.PlacedFood.Count > 0)
+        {
+            agent.SetDestination(GetClosestFood().position);
+        } else if(agent.remainingDistance <= agent.stoppingDistance && isIdling == false)
         {
             isIdling = true;
             Invoke("PickNextWaypoint", Random.Range(minIdleTime, maxIdleTime));
         }
     }
-
-
 
     private void PickNextWaypoint()
     {
@@ -55,5 +65,33 @@ public class HumanAI : MonoBehaviour
 
         agent.SetDestination(newDestination);
         isIdling = false;
+    }
+
+    public void StartSearchForFood()
+    {
+        isHungry = true;
+    }
+
+    public void StopSearchingForFood()
+    {
+        isHungry = false;
+    }
+
+    public Transform GetClosestFood()
+    {
+        Transform closest = null;
+        float minDst = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        foreach (Transform t in foodManager.PlacedFood)
+        {
+            float dst = Vector3.Distance(t.position, currentPos);
+            if(dst < minDst)
+            {
+                closest = t;
+                minDst = dst;
+            }
+        }
+
+        return closest;
     }
 }
