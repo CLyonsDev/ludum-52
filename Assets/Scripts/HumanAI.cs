@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class HumanAI : MonoBehaviour
 {
     private FoodManager foodManager;
+    private AudioManager audioManager;
 
     [Header("Movement Attributes")]
     [SerializeField] private float moveSpeed = 1f;
@@ -30,6 +31,7 @@ public class HumanAI : MonoBehaviour
     void Start()
     {
         foodManager = FoodManager._Instance;
+        audioManager = AudioManager._Instance;
         PickNextWaypoint();
     }
 
@@ -102,6 +104,8 @@ public class HumanAI : MonoBehaviour
             Debug.Log("Eat time");
             SendMessage("EatFood", other.gameObject.GetComponentInParent<FoodStats>().ReliefAmt);
             foodManager.RemoveFood(other.gameObject);
+
+            audioManager.CreateSoundAtPoint(audioManager.RandomSoundFromArray(audioManager.EatSounds), transform.position, 0.07f);
         }
     }
 }

@@ -249,7 +249,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Upgrade Food ($250)
+  m_text: Upgrade Food ($500)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -731,6 +731,12 @@ MonoBehaviour:
   startingHumans: 1
   mapCenter: {x: 25, y: 1, z: 25}
   roomSize: 20
+  humanSpawnSounds:
+  - {fileID: 8300000, guid: 0750d602f31d3eb458479fbdc1e3b407, type: 3}
+  - {fileID: 8300000, guid: d1295f97ac1a5b34baa97e9c82bff438, type: 3}
+  - {fileID: 8300000, guid: aeca1dc05fbd04d45835136c09a25bab, type: 3}
+  - {fileID: 8300000, guid: a5bf63a844cc6b44b98f39db08ee76d1, type: 3}
+  - {fileID: 8300000, guid: 90edad3bf93729d4ca87254edb2cecb5, type: 3}
   UpdateMoneyGameEvent: {fileID: 11400000, guid: aac14d6ada51f3c40864bcca30e302b8,
     type: 2}
 --- !u!114 &271778242
@@ -1138,6 +1144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 307886038}
+  - component: {fileID: 307886039}
   m_Layer: 0
   m_Name: =AUDIO MANAGER=
   m_TagString: Untagged
@@ -1161,6 +1168,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &307886039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 307886037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b11bd1df7189dc4ca2d78ef1773af03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EatSounds:
+  - {fileID: 8300000, guid: adc20e08294936e46be11e491cf33f25, type: 3}
+  - {fileID: 8300000, guid: 4820c383fc1a2fe43b0369d09794df24, type: 3}
+  - {fileID: 8300000, guid: 39f28c382a9f5c14f8643e6bbed8f091, type: 3}
+  SpawnFoodSounds:
+  - {fileID: 8300000, guid: 2c81e89604b25c945a78234e82c960a4, type: 3}
+  - {fileID: 8300000, guid: 2c81e89604b25c945a78234e82c960a4, type: 3}
+  DeathSting: {fileID: 8300000, guid: 40d1bf62523509b468b2799dedc3dc1f, type: 3}
+  UiFail: {fileID: 8300000, guid: a3b33bb481d044840b54499b877a6502, type: 3}
 --- !u!1 &332568988
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,7 +2875,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 100
+          m_IntArgument: 500
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

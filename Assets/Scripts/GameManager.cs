@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector3 mapCenter = new Vector3(25, 1, 25);
     [SerializeField] private int roomSize = 10;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip[] humanSpawnSounds;
+
     public static GameManager _Instance;
     public GameEvent UpdateMoneyGameEvent;
 
@@ -70,6 +73,9 @@ public class GameManager : MonoBehaviour
 
         Quaternion randRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
         GameObject newHuman = Instantiate(HumanPrefab, spawnPoint, randRotation);
+
+        AudioClip spawnClip = humanSpawnSounds[Random.Range(0, humanSpawnSounds.Length)];
+        AudioManager._Instance.CreateSoundAtPoint(spawnClip, spawnPoint, 0.01f);
 
         SpawnedHumans.Add(newHuman);
     }

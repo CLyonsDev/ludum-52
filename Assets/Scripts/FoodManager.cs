@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class FoodManager : MonoBehaviour
 {
+    private AudioManager audioManager;
     public FoodObject[] FoodPrefabs;
     public FoodObject CurrentFood;
     [SerializeField] private int FoodIndex = 0;
@@ -23,6 +24,7 @@ public class FoodManager : MonoBehaviour
 
     private void Start() {
         CurrentFood = FoodPrefabs[FoodIndex];
+        audioManager = AudioManager._Instance;
     }
 
     public void CreateFood(Vector3 position)
@@ -33,6 +35,9 @@ public class FoodManager : MonoBehaviour
             newFood.GetComponent<FoodStats>().ReliefAmt = CurrentFood.HungerReliefAmt;
             PlacedFood.Add(newFood.transform);
             UpdateMoneyUiGameEvent.Raise();
+            
+            AudioClip createClip = audioManager.RandomSoundFromArray(audioManager.SpawnFoodSounds);
+            audioManager.CreateSoundAtPoint(createClip, position, 0.05f);
         }
         else
         {

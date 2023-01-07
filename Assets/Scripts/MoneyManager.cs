@@ -30,6 +30,7 @@ public class MoneyManager : MonoBehaviour
 
         if (MoneyVariable.Value - amount < 0)
         {
+            AudioManager._Instance.CreateSoundGlobal(AudioManager._Instance.UiFail, 0.05f);
             return false;
         }
         else

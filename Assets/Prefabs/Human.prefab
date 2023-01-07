@@ -210,9 +210,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentHunger: 0
   MaxHunger: 100
-  SearchForFoodThreshold: 0.85
+  SearchForFoodThreshold: 0.6
   SearchingForFood: 0
-  HungerLossRate: 1.35
+  HungerLossRate: 5
+  NormalMaterial: {fileID: 2100000, guid: 53b0edbe3801b4d408eaf308bfd112e7, type: 2}
+  HungryMaterial: {fileID: 2100000, guid: f8fabea4e18b8b24987ad9ea0b95267e, type: 2}
 --- !u!54 &1965175774689719219
 Rigidbody:
   m_ObjectHideFlags: 0
