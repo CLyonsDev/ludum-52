@@ -21,6 +21,10 @@ public class FoodManager : MonoBehaviour
             Destroy(this);
     }
 
+    private void Start() {
+        CurrentFood = FoodPrefabs[FoodIndex];
+    }
+
     public void CreateFood(Vector3 position)
     {
         if (MoneyManager._Instance.RemoveMoney(CurrentFood.FoodPrice))
