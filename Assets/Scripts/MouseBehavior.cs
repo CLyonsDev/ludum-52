@@ -21,7 +21,7 @@ public class MouseBehavior : MonoBehaviour
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 100, FoodPlacementLayermask))
             {
-                foodManager.CreateFood(0, hit.point);
+                foodManager.CreateFood(hit.point);
             }
         }
     }

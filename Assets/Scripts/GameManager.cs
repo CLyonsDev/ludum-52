@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int roomSize = 10;
 
     public static GameManager _Instance;
+    public GameEvent UpdateMoneyGameEvent;
 
     private void Awake()
     {
@@ -39,6 +40,17 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < startingHumans; i++)
         {
             CreateHuman();
+        }
+
+        UpdateMoneyGameEvent.Raise();
+    }
+
+    public void PurchaseHuman(int price) {
+        if(MoneyManager._Instance.RemoveMoney(price))
+        {
+            CreateHuman();
+        }else{
+            Debug.LogWarning("Not enough money to purchase human");
         }
     }
 

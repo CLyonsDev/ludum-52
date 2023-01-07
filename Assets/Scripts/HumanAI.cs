@@ -100,7 +100,7 @@ public class HumanAI : MonoBehaviour
         if(other.gameObject.CompareTag("Food") && isHungry) {
             // Eat food
             Debug.Log("Eat time");
-            SendMessage("EatFood", 100);
+            SendMessage("EatFood", other.gameObject.GetComponentInParent<FoodStats>().ReliefAmt);
             foodManager.RemoveFood(other.gameObject);
         }
     }

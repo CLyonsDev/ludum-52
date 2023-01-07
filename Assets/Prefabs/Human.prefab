@@ -212,7 +212,7 @@ MonoBehaviour:
   MaxHunger: 100
   SearchForFoodThreshold: 0.85
   SearchingForFood: 0
-  HungerLossRate: 2
+  HungerLossRate: 1.35
 --- !u!54 &1965175774689719219
 Rigidbody:
   m_ObjectHideFlags: 0
