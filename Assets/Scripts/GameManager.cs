@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class GameManager : MonoBehaviour
     public static GameManager _Instance;
     public GameEvent UpdateMoneyGameEvent;
 
+    [Header("Enemy Settings")]
+    private float enemySpawnDelaySeconds = 120; // The enemy spawns every X amount of seconds
+    private bool readyToSpawnEnemy = true;
+    [SerializeField] private GameObject warningUiElement;
+
     private void Awake()
     {
         _Instance = this;
@@ -29,16 +35,21 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitializeGame();
+        //InitializeGame();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (readyToSpawnEnemy)
+        {
+            readyToSpawnEnemy = false;
+            Invoke("SpawnEnemyWarning", enemySpawnDelaySeconds - 4.5f);
+            Invoke("SpawnEnemy", enemySpawnDelaySeconds);
+        }
     }
 
-    private void InitializeGame()
+    public void InitializeGame()
     {
         for (int i = 0; i < startingHumans; i++)
         {
@@ -48,11 +59,14 @@ public class GameManager : MonoBehaviour
         UpdateMoneyGameEvent.Raise();
     }
 
-    public void PurchaseHuman(int price) {
-        if(MoneyManager._Instance.RemoveMoney(price))
+    public void PurchaseHuman(int price)
+    {
+        if (MoneyManager._Instance.RemoveMoney(price))
         {
             CreateHuman();
-        }else{
+        }
+        else
+        {
             Debug.LogWarning("Not enough money to purchase human");
         }
     }
@@ -101,5 +115,57 @@ public class GameManager : MonoBehaviour
         }
 
         return closest.transform;
+    }
+
+    public void OnEnemyDeath()
+    {
+        readyToSpawnEnemy = true;
+    }
+
+    private void SpawnEnemyWarning()
+    {
+        warningUiElement.SetActive(true);
+        warningUiElement.GetComponentInChildren<Animator>().SetTrigger("PlayAlert");
+        Invoke("DeactivateWarningAfterAnimation", 5f);
+        AudioManager._Instance.CreateSoundGlobal(AudioManager._Instance.UiAlertSound, 0.055f);
+        AudioManager._Instance.CalmBgmGo.GetComponent<BgmManager>().FadeOut();
+    }
+
+    private void DeactivateWarningAfterAnimation()
+    {
+        warningUiElement.SetActive(false);
+    }
+
+    private void SpawnEnemy()
+    {
+        AudioManager._Instance.CombatBgmGo.GetComponent<AudioSource>().Play();
+        Vector3 spawnPoint = Vector3.zero;
+
+        while (spawnPoint == Vector3.zero)
+        {
+            Vector3 randPoint = mapCenter + Random.insideUnitSphere * roomSize;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randPoint, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                spawnPoint = hit.position;
+            }
+        }
+
+        Quaternion randRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+        GameObject newHuman = Instantiate(MaxPrefab, spawnPoint, randRotation);
+
+        AudioClip spawnClip = AudioManager._Instance.MaxArriveSound;
+        AudioManager._Instance.CreateSoundAtPoint(spawnClip, spawnPoint, 0.03f);
+        AudioManager._Instance.CreateSoundAtPoint(AudioManager._Instance.MaxTeleportInSound, spawnPoint, 0.02f);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

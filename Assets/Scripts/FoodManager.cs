@@ -9,6 +9,7 @@ public class FoodManager : MonoBehaviour
     public FoodObject CurrentFood;
     [SerializeField] private int FoodIndex = 0;
     public List<Transform> PlacedFood = new List<Transform>();
+    public float FoodLifetime = 6f;
 
     public static FoodManager _Instance;
 
@@ -38,6 +39,8 @@ public class FoodManager : MonoBehaviour
             
             AudioClip createClip = audioManager.RandomSoundFromArray(audioManager.SpawnFoodSounds);
             audioManager.CreateSoundAtPoint(createClip, position, 0.05f);
+
+            newFood.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1, 1f), 1f, Random.Range(-1, 1f)), ForceMode.Impulse);
         }
         else
         {

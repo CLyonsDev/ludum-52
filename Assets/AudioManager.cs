@@ -9,10 +9,24 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] EatSounds;
     public AudioClip[] SpawnFoodSounds;
     public AudioClip DeathSting;
+    public AudioClip[] DeathRattles;
+    public AudioClip SickSound;
+    public AudioClip[] SickRattles;
+    public AudioClip[] HumanBarks;
+    public AudioClip MaxArriveSound;
+    public AudioClip MaxLeaveSound;
+    public AudioClip HumanTeleportedAwaySound;
+    public AudioClip MaxTeleportInSound;
+    public AudioClip UiAlertSound;
 
     [Space]
     [Header("UI")]
     public AudioClip UiFail;
+
+    [Space]
+    [Header("Audio Sources")]
+    public GameObject CalmBgmGo;
+    public GameObject CombatBgmGo;
 
     private void Awake()
     {

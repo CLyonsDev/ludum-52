@@ -16,11 +16,13 @@ public class MoneyManager : MonoBehaviour
     private void Start()
     {
         MoneyVariable.Value = StarterMoney;
+        UpdateMoneyUiText.Raise();
     }
 
     public void AddMoney(int amount)
     {
-        StarterMoney += amount;
+        MoneyVariable.Value += amount;
+        UpdateMoneyUiText.Raise();
     }
 
     public bool RemoveMoney(int amount)
