@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dca721f3d9316e40a0cc06f6919a6e2, type: 3}
-  m_Name: Basic Food
+  m_Name: Advanced Food
   m_EditorClassIdentifier: 
-  FoodPrefab: {fileID: 6115189240571946323, guid: 3f6bb1f9652709b45be4e2c42cab7cd9,
+  FoodPrefab: {fileID: 6115189240571946323, guid: a416ac05a8540bf419a0999d52b065e3,
     type: 3}
   FoodPrice: 5
-  HungerReliefAmt: 35
+  HungerReliefAmt: 50

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip[] humanSpawnSounds;
+    [SerializeField] private AudioClip victorySting;
 
     public static GameManager _Instance;
     public GameEvent UpdateMoneyGameEvent;
@@ -53,16 +54,15 @@ public class GameManager : MonoBehaviour
             Invoke("SpawnEnemy", enemySpawnDelaySeconds);
         }
 
-        if(isGameInitialized && SpawnedHumans.Count == 0)
+        if (isGameInitialized && SpawnedHumans.Count == 0)
         {
             Debug.LogWarning("Game over!");
             GameOverEvent.Raise();
         }
 
-        if(isGameInitialized && SpawnedHumans.Count >= HumansToWin.Value)
+        if (isGameInitialized && SpawnedHumans.Count >= HumansToWin.Value)
         {
-            GameWinEvent.Raise();
-            isGameInitialized = false;
+            WinGame();
         }
     }
 
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         {
             CreateHuman();
         }
-        
+
         isGameInitialized = true;
 
         UpdateMoneyGameEvent.Raise();
@@ -188,5 +188,21 @@ public class GameManager : MonoBehaviour
     public void LoadMenu()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void WinGame()
+    {
+        GameWinEvent.Raise();
+        isGameInitialized = false;
+
+        for (int i = SpawnedHumans.Count-1; i >= 0; i--)
+        {
+            RemoveHuman(SpawnedHumans[i]);
+        }
+
+        AudioManager._Instance.CalmBgmGo.GetComponent<BgmManager>().FadeOut();
+        AudioManager._Instance.CombatBgmGo.GetComponent<BgmManager>().FadeOut();
+        AudioManager._Instance.CreateSoundGlobal(victorySting, 0.05f);
+        AudioManager._Instance.CreateSoundGlobal(AudioManager._Instance.HarvestAllHumansSound, 0.04f);
     }
 }

@@ -45,10 +45,10 @@ public class MouseBehavior : MonoBehaviour
                 return;
             }
 
-            Ray clickRay = cam.ScreenPointToRay(Input.mousePosition);
-            Debug.DrawRay(clickRay.origin, clickRay.direction * 1000f, Color.red, 0.1f);
+            Ray leftClickRay = cam.ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(leftClickRay.origin, leftClickRay.direction * 1000f, Color.red, 0.1f);
 
-            if (Physics.Raycast(clickRay, out RaycastHit enemyHit, Mathf.Infinity, CharacterLayermask))
+            if (Physics.Raycast(leftClickRay, out RaycastHit enemyHit, Mathf.Infinity, CharacterLayermask))
             {
                 // Clicked on enemy
                 //Debug.Log("Enemy Click");
@@ -56,14 +56,15 @@ public class MouseBehavior : MonoBehaviour
                 audioManager.CreateSoundAtPoint(clip, enemyHit.point, 0.025f);
                 enemyHit.transform.root.gameObject.BroadcastMessage("TakeDamage");
             }
-            else if (Physics.Raycast(clickRay, out RaycastHit biofuelHit, Mathf.Infinity, BiofuelLayermask))
+            else if (Physics.Raycast(leftClickRay, out RaycastHit biofuelHit, Mathf.Infinity, BiofuelLayermask))
             {
                 // Clicked on biofuel
                 //Debug.Log("Biofuel Click");
-                MoneyManager._Instance.AddMoney(25);
+                audioManager.CreateSoundAtPoint(audioManager.BiofuelPickupSound, biofuelHit.point, 0.015f);
+                MoneyManager._Instance.AddMoney(15);
                 Destroy(biofuelHit.transform.root.gameObject);
             }
-            else if (Physics.Raycast(clickRay, out RaycastHit foodHit, Mathf.Infinity, FoodPlacementLayermask))
+            else if (Physics.Raycast(leftClickRay, out RaycastHit foodHit, Mathf.Infinity, FoodPlacementLayermask))
             {
                 // Clicked on ground to place food
                 //Debug.Log("Floor Click");
@@ -74,5 +75,17 @@ public class MouseBehavior : MonoBehaviour
                 Debug.Log("No valid click found");
             }
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray rightClickRay = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(rightClickRay, out RaycastHit biofuelHit, Mathf.Infinity, BiofuelLayermask))
+            {
+                // Clicked on biofuel
+                //Debug.Log("Biofuel Click");
+                //MoneyManager._Instance.AddMoney(15);
+                //Destroy(biofuelHit.transform.root.gameObject);
+            }
+        }   
     }
 }

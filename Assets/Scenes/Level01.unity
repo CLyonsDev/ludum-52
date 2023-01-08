@@ -749,7 +749,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 50
+          m_IntArgument: 100
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1284,6 +1284,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: aeca1dc05fbd04d45835136c09a25bab, type: 3}
   - {fileID: 8300000, guid: a5bf63a844cc6b44b98f39db08ee76d1, type: 3}
   - {fileID: 8300000, guid: 90edad3bf93729d4ca87254edb2cecb5, type: 3}
+  victorySting: {fileID: 8300000, guid: 79bb08b9faca3b54ea4312637301287b, type: 3}
   UpdateMoneyGameEvent: {fileID: 11400000, guid: aac14d6ada51f3c40864bcca30e302b8,
     type: 2}
   warningUiElement: {fileID: 1050701104}
@@ -1346,7 +1347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoneyVariable: {fileID: 11400000, guid: d5517b7348463eb4897e0d5a2c9555c5, type: 2}
-  StarterMoney: 100
+  StarterMoney: 120
   UpdateMoneyUiText: {fileID: 11400000, guid: aac14d6ada51f3c40864bcca30e302b8, type: 2}
 --- !u!1 &299648309
 GameObject:
@@ -1756,7 +1757,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 673a3b39a1cde794a9e9fe797a805ce2, type: 3}
   HumanBarks: []
   MaxArriveSound: {fileID: 8300000, guid: 31da3f30046cf864d8a9e1edd79e2134, type: 3}
-  MaxLeaveSound: {fileID: 8300000, guid: 055b64433780ef747a6fd8ecab774db1, type: 3}
+  MaxLeaveSound: {fileID: 8300000, guid: 8470252275cbc914aa8216ae277b57f1, type: 3}
   MaxPainSound:
   - {fileID: 8300000, guid: dfc01ed4159640345acf3d5716fb6e02, type: 3}
   - {fileID: 8300000, guid: 63ce45576b601fc4aacf4b48eb649023, type: 3}
@@ -1771,6 +1772,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e8a7e7cb8a804df4abe98bbf737d4c34, type: 3}
   - {fileID: 8300000, guid: a20c2d25c8a77eb489ff432221925a05, type: 3}
   - {fileID: 8300000, guid: 25e235082d1c36a42947e519957102d2, type: 3}
+  BiofuelPickupSound: {fileID: 8300000, guid: a5e0e3ec9e6644944bcd94723b0bb96c, type: 3}
+  HarvestAllHumansSound: {fileID: 8300000, guid: 3fb6283e4822d95408ca322d97754626,
+    type: 3}
   UiFail: {fileID: 8300000, guid: a3b33bb481d044840b54499b877a6502, type: 3}
   CalmBgmGo: {fileID: 959440104}
   CombatBgmGo: {fileID: 1654061430}
@@ -4770,6 +4774,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 864134251}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &864134254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5998,7 +6014,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buy Human ($50)
+  m_text: Buy Human ($100)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6778,7 +6794,7 @@ MonoBehaviour:
 
     TO GAIN MONEY.
 
-    PURCHASE ENOUGH
+    COLLECT ENOUGH
 
     HUMANS
     TO WIN!'

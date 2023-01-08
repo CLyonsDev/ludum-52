@@ -20,6 +20,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip MaxTeleportInSound;
     public AudioClip UiAlertSound;
     public AudioClip[] AttackSounds;
+    public AudioClip BiofuelPickupSound;
+    public AudioClip HarvestAllHumansSound;
 
     [Space]
     [Header("UI")]
