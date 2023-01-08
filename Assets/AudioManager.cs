@@ -15,9 +15,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] HumanBarks;
     public AudioClip MaxArriveSound;
     public AudioClip MaxLeaveSound;
+    public AudioClip[] MaxPainSound;
     public AudioClip HumanTeleportedAwaySound;
     public AudioClip MaxTeleportInSound;
     public AudioClip UiAlertSound;
+    public AudioClip[] AttackSounds;
 
     [Space]
     [Header("UI")]

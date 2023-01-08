@@ -15,6 +15,7 @@ public class UpdateProgressBar : MonoBehaviour
     }
 
     private void Update() {
-        img.fillAmount = Mathf.Lerp(img.fillAmount, (CurrentValue.Value / MaxValue.Value), 20 * Time.deltaTime);
+        //img.fillAmount = Mathf.Lerp(img.fillAmount, (CurrentValue.Value / MaxValue.Value), 20 * Time.deltaTime);
+        img.fillAmount = Mathf.Lerp(img.fillAmount, ((float)GameManager._Instance.SpawnedHumans.Count / MaxValue.Value), 20 * Time.deltaTime);
     }
 }

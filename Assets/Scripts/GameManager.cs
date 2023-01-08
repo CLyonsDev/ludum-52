@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int startingHumans;
     [SerializeField] private Vector3 mapCenter = new Vector3(25, 1, 25);
     [SerializeField] private int roomSize = 10;
+    public GameEvent GameOverEvent;
+    public GameEvent GameWinEvent;
+    public IntVariable HumansToWin;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip[] humanSpawnSounds;
@@ -26,6 +29,8 @@ public class GameManager : MonoBehaviour
     private float enemySpawnDelaySeconds = 120; // The enemy spawns every X amount of seconds
     private bool readyToSpawnEnemy = true;
     [SerializeField] private GameObject warningUiElement;
+
+    [SerializeField] private bool isGameInitialized = false;
 
     private void Awake()
     {
@@ -41,11 +46,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (readyToSpawnEnemy)
+        if (readyToSpawnEnemy && isGameInitialized)
         {
             readyToSpawnEnemy = false;
             Invoke("SpawnEnemyWarning", enemySpawnDelaySeconds - 4.5f);
             Invoke("SpawnEnemy", enemySpawnDelaySeconds);
+        }
+
+        if(isGameInitialized && SpawnedHumans.Count == 0)
+        {
+            Debug.LogWarning("Game over!");
+            GameOverEvent.Raise();
+        }
+
+        if(isGameInitialized && SpawnedHumans.Count >= HumansToWin.Value)
+        {
+            GameWinEvent.Raise();
+            isGameInitialized = false;
         }
     }
 
@@ -55,6 +72,8 @@ public class GameManager : MonoBehaviour
         {
             CreateHuman();
         }
+        
+        isGameInitialized = true;
 
         UpdateMoneyGameEvent.Raise();
     }
@@ -152,10 +171,12 @@ public class GameManager : MonoBehaviour
         }
 
         Quaternion randRotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-        GameObject newHuman = Instantiate(MaxPrefab, spawnPoint, randRotation);
+        GameObject newMax = Instantiate(MaxPrefab, spawnPoint, randRotation);
 
         AudioClip spawnClip = AudioManager._Instance.MaxArriveSound;
-        AudioManager._Instance.CreateSoundAtPoint(spawnClip, spawnPoint, 0.03f);
+        //AudioManager._Instance.CreateSoundAtPoint(spawnClip, spawnPoint, 0.03f);
+        newMax.GetComponent<AudioSource>().clip = spawnClip;
+        newMax.GetComponent<AudioSource>().Play();
         AudioManager._Instance.CreateSoundAtPoint(AudioManager._Instance.MaxTeleportInSound, spawnPoint, 0.02f);
     }
 

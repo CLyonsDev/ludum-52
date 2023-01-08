@@ -11,6 +11,6 @@ public class UI_MoneyScript : MonoBehaviour
 
     public void UpdateMoneyText()
     {
-        Text.SetText("b"+MoneyVariable.Value.ToString("#,##0"));
+        Text.SetText("$"+MoneyVariable.Value.ToString("#,##0"));
     }
 }

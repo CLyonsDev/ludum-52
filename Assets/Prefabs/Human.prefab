@@ -217,7 +217,7 @@ MonoBehaviour:
   ReadyToPuke: 1
   BiofuelPrefab: {fileID: 8609788032522009654, guid: 759543ba66a55564fae8d09113bb35f8,
     type: 3}
-  HungerLossRate: 6
+  HungerLossRate: 5
   NormalMaterial: {fileID: 2100000, guid: 53b0edbe3801b4d408eaf308bfd112e7, type: 2}
   HungryMaterial: {fileID: 2100000, guid: f8fabea4e18b8b24987ad9ea0b95267e, type: 2}
 --- !u!54 &1965175774689719219

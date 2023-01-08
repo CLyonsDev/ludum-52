@@ -12,6 +12,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private int CurrentClickCount = 0;
     [SerializeField] private Transform currentTarget;
 
+    private AudioManager audioManager;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -22,6 +24,7 @@ public class EnemyAI : MonoBehaviour
     {
         //AudioManager._Instance.CreateSoundAtPoint(AudioManager._Instance.MaxArriveSound, transform.position, 0.055f);
         gameManager = GameManager._Instance;
+        audioManager = AudioManager._Instance;
         //StartCoroutine(HumanAiLogic());
     }
 
@@ -34,7 +37,7 @@ public class EnemyAI : MonoBehaviour
         {
             agent.SetDestination(currentTarget.position);
 
-            if (agent.remainingDistance <= agent.stoppingDistance)
+            if (Vector3.Distance(transform.position, currentTarget.position) <= agent.stoppingDistance)
             {
                 AudioManager._Instance.CreateSoundAtPoint(AudioManager._Instance.HumanTeleportedAwaySound, transform.position, 0.045f);
                 gameManager.RemoveHuman(currentTarget.gameObject);
@@ -79,6 +82,9 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage()
     {
         CurrentClickCount++;
+
+        AudioClip painClip = audioManager.RandomSoundFromArray(audioManager.MaxPainSound);
+        audioManager.CreateSoundAtPoint(painClip, transform.position, 0.04f);
 
         if (CurrentClickCount >= ClicksToDefeat)
         {

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a951bbd785d6174fbf34da6ed84d223, type: 3}
-  m_Name: pMoneyToWin
+  m_Name: pHumansToWin
   m_EditorClassIdentifier: 
-  Value: 2500
+  Value: 30
   Description: 

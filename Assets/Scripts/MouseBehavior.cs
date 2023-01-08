@@ -11,11 +11,13 @@ public class MouseBehavior : MonoBehaviour
     public LayerMask InteractionLayermask;
     private Camera cam;
     private FoodManager foodManager;
+    private AudioManager audioManager;
 
     [SerializeField] private Transform currentlyHovering;
 
     private void Start()
     {
+        audioManager = AudioManager._Instance;
         cam = Camera.main.GetComponent<Camera>();
         foodManager = FoodManager._Instance;
     }
@@ -50,6 +52,8 @@ public class MouseBehavior : MonoBehaviour
             {
                 // Clicked on enemy
                 //Debug.Log("Enemy Click");
+                AudioClip clip = audioManager.RandomSoundFromArray(audioManager.AttackSounds);
+                audioManager.CreateSoundAtPoint(clip, enemyHit.point, 0.025f);
                 enemyHit.transform.root.gameObject.BroadcastMessage("TakeDamage");
             }
             else if (Physics.Raycast(clickRay, out RaycastHit biofuelHit, Mathf.Infinity, BiofuelLayermask))
