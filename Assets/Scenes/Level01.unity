@@ -1320,6 +1320,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 704
   currentlyHovering: {fileID: 0}
+  AttackParticleSystem: {fileID: 1196734351677488614, guid: 0c802b8acf0c4a748be39ddf5b3e0e68,
+    type: 3}
 --- !u!114 &271778243
 MonoBehaviour:
   m_ObjectHideFlags: 0

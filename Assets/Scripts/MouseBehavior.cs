@@ -15,6 +15,8 @@ public class MouseBehavior : MonoBehaviour
 
     [SerializeField] private Transform currentlyHovering;
 
+    public GameObject AttackParticleSystem;
+
     private void Start()
     {
         audioManager = AudioManager._Instance;
@@ -55,6 +57,7 @@ public class MouseBehavior : MonoBehaviour
                 AudioClip clip = audioManager.RandomSoundFromArray(audioManager.AttackSounds);
                 audioManager.CreateSoundAtPoint(clip, enemyHit.point, 0.025f);
                 enemyHit.transform.root.gameObject.BroadcastMessage("TakeDamage");
+                Instantiate(AttackParticleSystem, enemyHit.point, Quaternion.identity);
             }
             else if (Physics.Raycast(leftClickRay, out RaycastHit biofuelHit, Mathf.Infinity, BiofuelLayermask))
             {
