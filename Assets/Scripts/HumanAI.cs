@@ -27,6 +27,10 @@ public class HumanAI : MonoBehaviour
     [SerializeField]
     private float speed;
     private Vector3 lastPosition;
+    private float stuckTimer = 0f;
+    private float minBarkDelay = 12f;
+    private float maxBarkDelay = 24f;
+    private bool canBark = true;
 
     private void Awake()
     {
@@ -53,11 +57,24 @@ public class HumanAI : MonoBehaviour
         {
             agent.SetDestination(GetClosestFood().position);
         }
-        else if (agent.remainingDistance <= agent.stoppingDistance && isIdling == false)
+        else if (agent.remainingDistance <= agent.stoppingDistance + 0.1f && isIdling == false)
         {
             isIdling = true;
             //anim.SetBool("walking", false);
             Invoke("PickNextWaypoint", Random.Range(minIdleTime, maxIdleTime));
+        }else if (!isHungry && !isIdling)
+        {
+            stuckTimer += Time.deltaTime;
+            if(stuckTimer >= 7f)
+            {
+                PickNextWaypoint();
+            }
+        }
+
+        if(canBark)
+        {
+            canBark = false;
+            Invoke("PlayBark", Random.Range(minBarkDelay, maxBarkDelay));
         }
 
         //Debug.Log(speed);
@@ -88,6 +105,7 @@ public class HumanAI : MonoBehaviour
         }
 
         agent.SetDestination(newDestination);
+        stuckTimer = 0f;
         isIdling = false;
     }
 
@@ -131,5 +149,15 @@ public class HumanAI : MonoBehaviour
 
             audioManager.CreateSoundAtPoint(audioManager.RandomSoundFromArray(audioManager.EatSounds), transform.position, 0.07f);
         }
+    }
+
+    private void PlayBark()
+    {
+        if(Random.Range(0, 100) > 35)
+            return;
+
+        AudioClip barkClip = audioManager.RandomSoundFromArray(audioManager.HumanBarks);
+        audioManager.CreateSoundAtPoint(barkClip, transform.position, 0.04f);
+        canBark = true;
     }
 }

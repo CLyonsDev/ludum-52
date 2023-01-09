@@ -15,6 +15,8 @@ public class EnemyAI : MonoBehaviour
     private AudioManager audioManager;
 
     private bool hasWon = false;
+    private bool canAbduct = true;
+    private float abductionGracePeriod = 0.6f;
 
     private void Awake()
     {
@@ -39,10 +41,12 @@ public class EnemyAI : MonoBehaviour
         {
             agent.SetDestination(currentTarget.position);
 
-            if (Vector3.Distance(transform.position, currentTarget.position) <= agent.stoppingDistance)
+            if (Vector3.Distance(transform.position, currentTarget.position) <= agent.stoppingDistance && canAbduct)
             {
                 AudioManager._Instance.CreateSoundAtPoint(AudioManager._Instance.HumanTeleportedAwaySound, transform.position, 0.045f);
                 gameManager.RemoveHuman(currentTarget.gameObject);
+                canAbduct = false;
+                Invoke("ResetCanAbduct", abductionGracePeriod);
             }
         }
         else
@@ -56,6 +60,11 @@ public class EnemyAI : MonoBehaviour
             transform.LookAt(new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z));
             GetComponent<Animator>().SetTrigger("gameover");
         }
+    }
+
+    private void ResetCanAbduct()
+    {
+        canAbduct = true;
     }
 
     private IEnumerator HumanAiLogic()
@@ -101,6 +110,7 @@ public class EnemyAI : MonoBehaviour
             AudioManager._Instance.CreateSoundAtPoint(AudioManager._Instance.MaxLeaveSound, transform.position, 0.04f);
             AudioManager._Instance.CombatBgmGo.GetComponent<AudioSource>().Stop();
             AudioManager._Instance.CalmBgmGo.GetComponent<BgmManager>().FadeIn();
+            MoneyManager._Instance.AddMoney(300);
 
             Destroy(this.gameObject);
         }
