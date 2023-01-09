@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UpdateProgressBar : MonoBehaviour
 {
-    public IntVariable CurrentValue;
+    //public IntVariable CurrentValue;
     public IntVariable MaxValue;
 
     private Image img;
@@ -16,6 +16,6 @@ public class UpdateProgressBar : MonoBehaviour
 
     private void Update() {
         //img.fillAmount = Mathf.Lerp(img.fillAmount, (CurrentValue.Value / MaxValue.Value), 20 * Time.deltaTime);
-        img.fillAmount = Mathf.Lerp(img.fillAmount, ((float)GameManager._Instance.SpawnedHumans.Count / MaxValue.Value), 20 * Time.deltaTime);
+        img.fillAmount = Mathf.Lerp(img.fillAmount, ((float)GameManager._Instance.SpawnedHumans.Count / (float)MaxValue.Value), 20 * Time.deltaTime);
     }
 }

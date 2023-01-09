@@ -16,8 +16,11 @@ public class Hunger : MonoBehaviour
 
     public float HungerLossRate;
 
-    public Material NormalMaterial;
-    public Material HungryMaterial;
+    //public Material NormalMaterial;
+    //public Material HungryMaterial;
+
+    public Color NormalBaseColor;
+    public Color HungryColor;
 
     private float HungerMinInitDelay = 0f;
     private float HungerMaxInitDelay = 7f;
@@ -32,7 +35,7 @@ public class Hunger : MonoBehaviour
 
     private void Update()
     {
-        if(canBeHungry)
+        if (canBeHungry)
             CurrentHunger -= HungerLossRate * Time.deltaTime;
 
         if (CurrentHunger <= 0)
@@ -67,10 +70,12 @@ public class Hunger : MonoBehaviour
     {
         foreach (Renderer r in transform.GetComponentsInChildren<Renderer>())
         {
+            //Material m = r.material;
+            //m.SetColor("_Color", HungryColor)
             if (SearchingForFood)
-                r.material = HungryMaterial;
+                r.material.SetColor("_BaseColor", HungryColor);
             else
-                r.material = NormalMaterial;
+                r.material.SetColor("_BaseColor", NormalBaseColor);
         }
     }
 
@@ -103,10 +108,11 @@ public class Hunger : MonoBehaviour
 
     private void Die()
     {
-        GameManager._Instance.RemoveHuman(this.gameObject);
+        GetComponent<Animator>().SetTrigger("die");
         AudioClip clip = AudioManager._Instance.RandomSoundFromArray(AudioManager._Instance.DeathRattles);
-
         AudioManager._Instance.CreateSoundAtPoint(AudioManager._Instance.DeathSting, transform.position, 0.03f);
         AudioManager._Instance.CreateSoundAtPoint(clip, transform.position, 0.03f);
+
+        GameManager._Instance.RemoveHuman(this.gameObject);
     }
 }

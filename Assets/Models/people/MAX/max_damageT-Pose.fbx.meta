@@ -1,9 +1,42 @@
 fileFormatVersion: 2
-guid: 8a25407d7343d584cb39193c9fb4cad6
+guid: d2995161a8b178f43be6023c4ecc53d8
 ModelImporter:
   serializedVersion: 21300
-  internalIDToNameTable: []
-  externalObjects: {}
+  internalIDToNameTable:
+  - first:
+      74: -203655887218126122
+    second: mixamo.com
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Armor
+    second: {fileID: 2100000, guid: 9537428d3aa59bc4aab7c0968fc08a64, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Belt
+    second: {fileID: 2100000, guid: 7716894d375774541b245a0dafba2f16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Beret
+    second: {fileID: 2100000, guid: 357f79b3b1608ae4da6b0232fac8dfe8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: None
+    second: {fileID: 2100000, guid: 8983343e6e381fc40bf942e0beee1301, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: 53d814de3e293b24a917860c7fc53bc9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Spacesuit.002
+    second: {fileID: 2100000, guid: 614b29e743336374ebcf10bb38fe0f78, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -16,8 +49,7 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
-      human bone 'Hips' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -76,30 +108,12 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 60abfb8615668ca49846f14d8ccf03f0
-  - a2529a7a97ac7774cb85676ee10feaea
-  - 5836774569734c743b54d1d3f54ea7ea
-  - 5405ae015961e404088078e1565a1c62
-  - ed8dabd61dcdc4d44872ceda214403e0
-  - 0e74d1d8189b4e641a83898a9f681d67
-  - 94ea91c368fbfce48a9d1a56e92849e4
-  - cf7f256ec7bef6d4fabe024e3a4dbeeb
-  - b76fbbe628fddf646ba17d7b4dfc6315
-  - 3189f8923c923284dbf6a01e50c4c786
-  - e841cbeab8e6d1145b9479bc32bc2be0
-  - 194ce968574be30418b62831369aa192
-  - 41aea49b1701b7f48a1d675eb6be80dd
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton:
-    - name: human(Clone)
-      parentName: 
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 100, y: 100, z: 100}
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -110,13 +124,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0

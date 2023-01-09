@@ -8,6 +8,8 @@ public class HumanAI : MonoBehaviour
     private FoodManager foodManager;
     private AudioManager audioManager;
 
+    private Animator anim;
+
     [Header("Movement Attributes")]
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float walkSpeed = 1f;
@@ -25,6 +27,7 @@ public class HumanAI : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -38,28 +41,35 @@ public class HumanAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(foodManager == null)
+        if (foodManager == null)
             foodManager = FoodManager._Instance;
 
-        if(isHungry && foodManager.PlacedFood.Count > 0)
+        if (isHungry && foodManager.PlacedFood.Count > 0)
         {
             agent.SetDestination(GetClosestFood().position);
-        } else if(agent.remainingDistance <= agent.stoppingDistance && isIdling == false)
+        }
+        else if (agent.remainingDistance <= agent.stoppingDistance && isIdling == false)
         {
             isIdling = true;
+            //anim.SetBool("walking", false);
             Invoke("PickNextWaypoint", Random.Range(minIdleTime, maxIdleTime));
         }
+
+        if (isIdling == true)
+            anim.SetBool("walking", false);
+        else
+            anim.SetBool("walking", true);
     }
 
     private void PickNextWaypoint()
     {
         Vector3 newDestination = Vector3.zero;
 
-        while(newDestination == Vector3.zero)
+        while (newDestination == Vector3.zero)
         {
             Vector3 randpt = transform.position + Random.insideUnitSphere * 5;
             NavMeshHit hit;
-            if(NavMesh.SamplePosition(randpt, out hit, 1.0f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randpt, out hit, 1.0f, NavMesh.AllAreas))
             {
                 newDestination = hit.position;
             }
@@ -87,7 +97,7 @@ public class HumanAI : MonoBehaviour
         foreach (Transform t in foodManager.PlacedFood)
         {
             float dst = Vector3.Distance(t.position, currentPos);
-            if(dst < minDst)
+            if (dst < minDst)
             {
                 closest = t;
                 minDst = dst;
@@ -97,9 +107,11 @@ public class HumanAI : MonoBehaviour
         return closest;
     }
 
-    private void OnTriggerStay(Collider other) {
+    private void OnTriggerStay(Collider other)
+    {
         Debug.Log("Trigger Entered" + other.gameObject.tag);
-        if(other.gameObject.CompareTag("Food") && isHungry) {
+        if (other.gameObject.CompareTag("Food") && isHungry)
+        {
             // Eat food
             Debug.Log("Eat time");
             SendMessage("EatFood", other.gameObject.GetComponentInParent<FoodStats>().ReliefAmt);

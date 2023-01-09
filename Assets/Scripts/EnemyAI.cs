@@ -14,6 +14,8 @@ public class EnemyAI : MonoBehaviour
 
     private AudioManager audioManager;
 
+    private bool hasWon = false;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -46,6 +48,13 @@ public class EnemyAI : MonoBehaviour
         else
         {
             agent.SetDestination(agent.transform.position);
+        }
+
+        if(hasWon == false && gameManager.SpawnedHumans.Count == 0)
+        {
+            hasWon = true;
+            transform.LookAt(new Vector3(Camera.main.transform.position.x, transform.position.y, Camera.main.transform.position.z));
+            GetComponent<Animator>().SetTrigger("gameover");
         }
     }
 
