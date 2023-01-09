@@ -24,6 +24,10 @@ public class HumanAI : MonoBehaviour
     [Header("Behavior Tree")]
     [SerializeField] private bool isHungry = false;
 
+    [SerializeField]
+    private float speed;
+    private Vector3 lastPosition;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -33,6 +37,7 @@ public class HumanAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        lastPosition = transform.position;
         foodManager = FoodManager._Instance;
         audioManager = AudioManager._Instance;
         PickNextWaypoint();
@@ -55,10 +60,17 @@ public class HumanAI : MonoBehaviour
             Invoke("PickNextWaypoint", Random.Range(minIdleTime, maxIdleTime));
         }
 
-        if (isIdling == true)
+        //Debug.Log(speed);
+        if (speed <= 0.01f)
             anim.SetBool("walking", false);
         else
             anim.SetBool("walking", true);
+    }
+
+    private void FixedUpdate() {
+        //speed = Mathf.Lerp(speed, (transform.position - lastPosition).magnitude, 0.7f);
+        speed = (transform.position - lastPosition).magnitude;
+        lastPosition = transform.position;
     }
 
     private void PickNextWaypoint()

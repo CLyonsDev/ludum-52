@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a951bbd785d6174fbf34da6ed84d223, type: 3}
   m_Name: pHumansToWin
   m_EditorClassIdentifier: 
-  Value: 30
+  Value: 24
   Description: 

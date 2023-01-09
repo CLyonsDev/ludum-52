@@ -101,7 +101,8 @@ public class Hunger : MonoBehaviour
         AudioManager._Instance.CreateSoundAtPoint(clip, transform.position, 0.03f);
 
         GameObject biofuel = Instantiate(BiofuelPrefab, transform.position, Quaternion.identity);
-        biofuel.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1.5f, 1.5f), 1f, Random.Range(-1.5f, 1.5f)), ForceMode.Impulse);
+        //biofuel.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1.5f, 1.5f), 1f, Random.Range(-1.5f, 1.5f)), ForceMode.Impulse);
+        biofuel.GetComponent<Rigidbody>().AddForce(transform.forward * Random.Range(1.5f, 3f), ForceMode.Impulse);
         Destroy(biofuel, 8f);
         ReadyToPuke = true;
     }
