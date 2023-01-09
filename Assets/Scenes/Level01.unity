@@ -1334,6 +1334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FoodPrefabs:
   - {fileID: 11400000, guid: e63f980895fc7c94a9633bafc360436a, type: 2}
+  - {fileID: 11400000, guid: 2d29af31a4ed8ab46b3b5f9b31fe203d, type: 2}
   CurrentFood: {fileID: 0}
   FoodIndex: 0
   PlacedFood: []
